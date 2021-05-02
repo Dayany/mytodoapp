@@ -1,9 +1,12 @@
+import { MDBContainer } from 'mdb-react-ui-kit';
 import React from 'react';
 import Main from './components/Main/Main';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <Main/>
+    <MDBContainer className="text-center">    
+      <Main/>
+    </MDBContainer>
   );
 }
 
