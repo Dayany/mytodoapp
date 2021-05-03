@@ -1,9 +1,13 @@
 import React from 'react';
-import AddTask from '../AddTask/AddTask'
+import AddTask from '../Task/AddTask'
+import ShowTasks from '../Task/ShowTasks';
 
 const Main: React.FC = () => {
     return (
+        <>
         <AddTask />
+        <ShowTasks />
+        </>
     )
 }
 
