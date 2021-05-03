@@ -7,7 +7,8 @@ import {MDBRow,
   MDBDropdownItem,
   MDBDropdownMenu,
   MDBDropdownToggle,
-  MDBBtn} from 'mdb-react-ui-kit'
+  MDBBtn,
+  MDBIcon} from 'mdb-react-ui-kit'
 
 
 const AddTask: React.FC = () =>{

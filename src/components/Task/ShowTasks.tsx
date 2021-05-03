@@ -1,4 +1,4 @@
-import { MDBRow } from 'mdb-react-ui-kit';
+import { MDBRow , MDBContainer} from 'mdb-react-ui-kit';
 import React, { useState } from 'react';
 import TaskCard from './TaskCard'
 
@@ -7,12 +7,14 @@ const ShowTasks: React.FC = () => {
 
     return (
         <React.Fragment>
-            {tasks.map((task) =>
-                <MDBRow>
-                    <TaskCard />
-                </MDBRow>
-            )
-            } 
+            <MDBContainer>
+                {tasks.map((task) =>
+                    <MDBRow>
+                        <TaskCard />
+                    </MDBRow>
+                )
+                } 
+            </MDBContainer>
         </React.Fragment>       
     )
 }
