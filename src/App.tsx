@@ -5,7 +5,7 @@ import Main from './components/Main/Main';
 const App: React.FC = () => {
   return (
     <MDBContainer className="text-center">    
-      <Main/>
+      <Main />
     </MDBContainer>
   );
 }
