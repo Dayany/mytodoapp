@@ -7,7 +7,7 @@ const TabTask: React.FC = () => {
   return (
     <MDBTabs pills className='card-header-tabs'>
       <MDBTabsItem>
-        <MDBTabsLink active>
+        <MDBTabsLink  active>
           To do
         </MDBTabsLink>
       </MDBTabsItem>

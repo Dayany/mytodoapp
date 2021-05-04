@@ -4,7 +4,7 @@ import TaskCard from './TaskCard'
 import TabTask from './TabTask'
 
 const ShowTasks: React.FC = () => {
-  const [tasks, setTasks] = useState([1,2,3,4]);
+  const [tasks, setTasks] = useState<ITask[]>([{ isDone: true },{ isDone: false },{ isDone: false } ,{ isDone: false }]);
 
   return (
     <React.Fragment>
@@ -14,7 +14,7 @@ const ShowTasks: React.FC = () => {
       {
         tasks.map((task) =>
           <MDBRow>
-            <TaskCard />
+            <TaskCard task={task}/>
           </MDBRow>
         )
       } 
