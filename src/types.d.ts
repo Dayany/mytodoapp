@@ -1,5 +1,11 @@
   interface ITask{
-    isDone: boolean
+    id: string,
+    isDone: boolean,
+    title: string,
+    content: string,
+    user: string,
+    createdAt: Date
+    priority: IPriority
   }
 
   interface IPriority{

@@ -11,13 +11,13 @@ const TaskCard: React.FC<Props> = ({ task }) => {
       <MDBCard shadow='0' border={ borderStyle } background='white' className='mb-3' >
         <MDBCardHeader  border={ borderStyle } >Urgent</MDBCardHeader>
           <MDBCardBody  border={ borderStyle } >
-            <MDBCardTitle>Task title</MDBCardTitle>
-            <MDBCardText>With supporting text below as a natural lead-in to additional content.</MDBCardText>
+            <MDBCardTitle>{task.title}</MDBCardTitle>
+            <MDBCardText>{task.content}</MDBCardText>
             <MDBBtn color="danger"  href='#'>Delete</MDBBtn>
             <span>  </span>
             <MDBBtn color="success"  href='#'>Done</MDBBtn>
           </MDBCardBody>
-        <MDBCardFooter  border={ borderStyle } >Created:  | By: </MDBCardFooter>
+        <MDBCardFooter  border={ borderStyle } >Created:  {task.createdAt}| By:{task.user} </MDBCardFooter>
       </MDBCard>
     </React.Fragment>
   )

@@ -1,10 +1,18 @@
 import { MDBRow } from 'mdb-react-ui-kit';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TaskCard from './TaskCard'
 import TabTask from './TabTask'
 
 const ShowTasks: React.FC = () => {
-  const [tasks, setTasks] = useState<ITask[]>([{ isDone: true },{ isDone: false },{ isDone: false } ,{ isDone: false }]);
+  const [tasks, setTasks] = useState<ITask[]>([]);
+  useEffect(() => {
+    async function fetchRecipes() {
+      const response = await fetch(`${process.env.REACT_APP_API_SERVER}tasks`);
+      const json = await response.json();
+      setTasks(json);
+    }
+    fetchRecipes();
+  }, []);
 
   return (
     <React.Fragment>
