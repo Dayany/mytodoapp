@@ -7,20 +7,19 @@ import {MDBRow,
   MDBDropdownItem,
   MDBDropdownMenu,
   MDBDropdownToggle,
-  MDBBtn,
-  MDBIcon} from 'mdb-react-ui-kit'
+  MDBBtn
+  } from 'mdb-react-ui-kit'
 
 
 const AddTask: React.FC = () =>{
-    const [task, setTask] = useState("");
-    const submitTask = (): void => {
-        console.log(task)
-    }
+  const [task, setTask] = useState("");
+  const submitTask = (): void => {
+    console.log(task)
+  }
 
 
   return (
     <MDBRow className='d-flex justify-content-center'>
-      <h1>Add Task</h1>
       <MDBInputGroup className='mb-3'>
         <MDBInputGroupElement type='text'  
             value={task}
