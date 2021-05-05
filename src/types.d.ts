@@ -4,7 +4,7 @@
     title: string,
     content: string,
     user: string,
-    createdAt: Date
+    createdAt: string
     priority: IPriority
   }
 
