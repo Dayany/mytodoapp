@@ -6,18 +6,23 @@ interface Props {
 
 const TaskCard: React.FC<Props> = ({ task }) => {
   const borderStyle =  task.isDone ? "success" : "secondary";
+  console.log(task)
   return(
-    <React.Fragment>
+    <React.Fragment key={task.uuid}>
       <MDBCard shadow='0' border={ borderStyle } background='white' className='mb-3' >
-        <MDBCardHeader  border={ borderStyle } >Urgent</MDBCardHeader>
-          <MDBCardBody  border={ borderStyle } >
-            <MDBCardTitle>{task.title}</MDBCardTitle>
-            <MDBCardText>{task.content}</MDBCardText>
-            <MDBBtn color="danger"  href='#'>Delete</MDBBtn>
-            <span>  </span>
-            <MDBBtn color="success"  href='#'>Done</MDBBtn>
-          </MDBCardBody>
-        <MDBCardFooter  border={ borderStyle } >Created:  {task.createdAt}| By:{task.user} </MDBCardFooter>
+        {task.priority.special ?
+            <MDBCardHeader  background= "danger" className="text-white " order="danger">Urgent</MDBCardHeader>
+          :
+            null
+        }
+        <MDBCardBody  border={ borderStyle } >
+          <MDBCardTitle>{task.title}</MDBCardTitle>
+          <MDBCardText>{task.content}</MDBCardText>
+          <MDBBtn color="danger"  href='#'>Delete</MDBBtn>
+          <span>  </span>
+          <MDBBtn color="success"  href='#'>Done</MDBBtn>
+        </MDBCardBody>
+        <MDBCardFooter  border={ borderStyle } >Created:  {task.createdAt} | By: {task.user} </MDBCardFooter>
       </MDBCard>
     </React.Fragment>
   )

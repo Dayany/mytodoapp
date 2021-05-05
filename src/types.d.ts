@@ -1,5 +1,5 @@
   interface ITask{
-    id: string,
+    uuid: string,
     isDone: boolean,
     title: string,
     content: string,

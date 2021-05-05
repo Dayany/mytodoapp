@@ -21,7 +21,7 @@ const ShowTasks: React.FC = () => {
       </MDBRow>
       {
         tasks.map((task) =>
-          <MDBRow>
+          <MDBRow key={task.uuid}>
             <TaskCard task={task}/>
           </MDBRow>
         )
