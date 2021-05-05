@@ -6,7 +6,6 @@ interface Props {
 
 const TaskCard: React.FC<Props> = ({ task }) => {
   const borderStyle =  task.isDone ? "success" : "secondary";
-  console.log(task)
   return(
     <React.Fragment key={task.uuid}>
       <MDBCard shadow='0' border={ borderStyle } background='white' className='mb-3' >
@@ -18,7 +17,7 @@ const TaskCard: React.FC<Props> = ({ task }) => {
         <MDBCardBody  border={ borderStyle } >
           <MDBCardTitle>{task.title}</MDBCardTitle>
           <MDBCardText>{task.content}</MDBCardText>
-          <MDBBtn color="danger"  href='#'>Delete</MDBBtn>
+          <MDBBtn color="primary"  href='#'>Expand Task</MDBBtn>
           <span>  </span>
           <MDBBtn color="success"  href='#'>Done</MDBBtn>
         </MDBCardBody>
