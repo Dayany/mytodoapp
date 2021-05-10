@@ -58,12 +58,13 @@ const AddTask: React.FC = () =>{
     };
     try {
       await fetch(`${process.env.REACT_APP_API_SERVER}tasks`, requestOptions)
-        .then((response) => console.log(response.json()))
+        .then((response) => response.json())
+        .then((data) => onAddTask(data))
+    
     } catch (error) {
       throw new Error(error);
     }
 
-    onAddTask(data);
   };
 
 
