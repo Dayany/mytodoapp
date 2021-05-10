@@ -16,12 +16,9 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { addTask } from '../../Redux/Actions/TasksActions';
 
 const AddTask: React.FC = () =>{
-  const tasks = useSelector<TaskState, TaskState['tasks']> ((state: TaskState) => state.tasks)
   const dispatch = useDispatch();
 
   const onAddTask = (task: ITask) => {
-    // dispatch(addTask(task));
-
     dispatch({type: "ADD_TASK", payload: task});
   }
   const uuid: string = generateUuid();

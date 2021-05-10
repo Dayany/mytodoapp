@@ -12,7 +12,9 @@ type ActionA = { type: "ADD_TASK", payload: ITask }
 
 type ActionB = { type: "ADD_INITIAL_TASKS", payload: ITask[] }
 
-type Action = ActionA | ActionB
+type ActionC = { type: "REMOVE_TASK", payload: string}
+
+type Action = ActionA | ActionB | ActionC 
 
 export const tasksReducer = (state: TaskState = initialState, action: Action ) => {
   switch (action.type ){
@@ -21,6 +23,9 @@ export const tasksReducer = (state: TaskState = initialState, action: Action ) =
     }
     case "ADD_TASK": {
       return {tasks: [...state.tasks, action.payload]}
+    }
+    case "REMOVE_TASK": {
+      return { tasks: state.tasks.filter( curr => { return curr.uuid !== action.payload } ) }
     }
     default: {
       return state;
