@@ -9,8 +9,17 @@ const TaskCard: React.FC<Props> = ({ task }) => {
   const borderStyle =  task.isDone ? "success" : "secondary";
   const dispatch = useDispatch();
 
-  const deleteTask = (uuid: string) => {
-    dispatch({type: "REMOVE_TASK", payload: uuid})
+  const deleteTask = async (uuid: string) => {
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json "}
+    }
+    try{ 
+      await fetch(`${process.env.REACT_APP_API_SERVER}tasks/${uuid}`, requestOptions)
+      .then((response) => dispatch({type: "REMOVE_TASK", payload: uuid}))
+    } catch(error) {
+      throw new Error(error)
+    }
   }
   return(
     <React.Fragment key={task.uuid}>
