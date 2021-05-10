@@ -11,7 +11,19 @@ import {MDBRow,
   } from 'mdb-react-ui-kit'
 import { generateUuid } from "../Helpers/Helper";
 
+import { TaskState } from '../../Redux/reducers/TasksReducer'
+import { useDispatch, useSelector } from 'react-redux';
+// import { addTask } from '../../Redux/Actions/TasksActions';
+
 const AddTask: React.FC = () =>{
+  const tasks = useSelector<TaskState, TaskState['tasks']> ((state: TaskState) => state.tasks)
+  const dispatch = useDispatch();
+
+  const onAddTask = (task: ITask) => {
+    // dispatch(addTask(task));
+
+    dispatch({type: "ADD_TASK", payload: task});
+  }
   const uuid: string = generateUuid();
   const [content, setContent] = useState(""); 
   const [title, setTitle] = useState("");
@@ -49,10 +61,12 @@ const AddTask: React.FC = () =>{
     };
     try {
       await fetch(`${process.env.REACT_APP_API_SERVER}tasks`, requestOptions)
-        .then((response) => response.json())
+        .then((response) => console.log(response.json()))
     } catch (error) {
       throw new Error(error);
     }
+
+    onAddTask(data);
   };
 
 
