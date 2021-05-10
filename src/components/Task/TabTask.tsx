@@ -1,15 +1,29 @@
 import React, { useState } from 'react';
 import { MDBTabs, MDBTabsItem, MDBTabsLink } from 'mdb-react-ui-kit';
+import { useDispatch } from 'react-redux';
 
 
 const TabTask: React.FC = () => {
   const [fillActive, setFillActive] = useState('tab1');
+  const dispatch = useDispatch();
 
+  const changeCategories = (isDone: boolean) => {
+    dispatch({type: "CHANGE_CATEGORY", payload: isDone});
+  }
   const handleFillClick = (value: string) => {
     if (value === fillActive) {
       return;
     }
 
+    let isDone: boolean;
+    if(value === 'tab1'){
+      isDone = false;
+    }else{
+      isDone = true;
+    }
+
+    changeCategories(isDone);
+    
     setFillActive(value);
   };
 

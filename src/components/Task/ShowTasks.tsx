@@ -7,8 +7,8 @@ import { TaskState } from '../../Redux/reducers/TasksReducer';
 
 const ShowTasks: React.FC = () => {
 
-  const tasks = useSelector<TaskState, TaskState['tasks']> ((state: TaskState) => state.tasks)
-
+  const tasks: ITask[] = useSelector<TaskState, TaskState['tasks']> ((state: TaskState) => state.tasks)
+  const displayDoneTasks: boolean = useSelector<TaskState, TaskState['displayDoneTasks']> ((state: TaskState) => state.displayDoneTasks)
   const dispatch = useDispatch();
 
   const addInitialTasks = (task: ITask[]) => {
@@ -18,24 +18,25 @@ const ShowTasks: React.FC = () => {
   useEffect(() => {
     async function fetchRecipes() {
       const response = await fetch(`${process.env.REACT_APP_API_SERVER}tasks`);
-      const json = await response.json();
+      const json: ITask[] = await response.json();
       addInitialTasks(json);
     }
     fetchRecipes();
   }, []);
+  const filteredTasks = tasks?.filter((task: ITask) => {return task.isDone === displayDoneTasks });
+  const displayFilteredCards =
+      filteredTasks?.map((task) =>
+        <MDBRow key={task.uuid}>
+          <TaskCard task={task}/>
+        </MDBRow>
+      )
 
   return (
     <React.Fragment>
       <MDBRow style={{marginBottom: '20px'}}>
         <TabTask />
       </MDBRow>
-      {
-        tasks?.map((task) =>
-          <MDBRow key={task.uuid}>
-            <TaskCard task={task}/>
-          </MDBRow>
-        )
-      } 
+      {displayFilteredCards} 
     </React.Fragment>       
   )
 }

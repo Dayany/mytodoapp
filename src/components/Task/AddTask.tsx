@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const AddTask: React.FC = () =>{
   const dispatch = useDispatch();
 
-  const onAddTask = (task: ITask) => {
+  const AddTask = (task: ITask) => {
     dispatch({type: "ADD_TASK", payload: task});
   }
   const uuid: string = generateUuid();
@@ -59,7 +59,7 @@ const AddTask: React.FC = () =>{
     try {
       await fetch(`${process.env.REACT_APP_API_SERVER}tasks`, requestOptions)
         .then((response) => response.json())
-        .then((data) => onAddTask(data))
+        .then((data) => AddTask(data))
     
     } catch (error) {
       throw new Error(error);
