@@ -23,7 +23,7 @@ const ShowTasks: React.FC = () => {
     }
     fetchRecipes();
   }, []);
-  const filteredTasks = tasks?.filter((task: ITask) => {return task.isDone === displayDoneTasks });
+  const filteredTasks: ITask[] = tasks?.filter((task: ITask) => {return task.isDone === displayDoneTasks });
   const displayFilteredCards =
       filteredTasks?.map((task) =>
         <MDBRow key={task.uuid}>

@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
 import {MDBRow,
-  MDBInputGroup,
-  MDBInputGroupElement,
-  MDBDropdown,
-  MDBDropdownLink,
-  MDBDropdownItem,
-  MDBDropdownMenu,
-  MDBDropdownToggle,
+  MDBInput,
+  MDBContainer,
+  MDBIcon,
   MDBBtn
   } from 'mdb-react-ui-kit'
 import { generateUuid } from "../Helpers/Helper";
 
-import { TaskState } from '../../Redux/reducers/TasksReducer'
-import { useDispatch, useSelector } from 'react-redux';
-// import { addTask } from '../../Redux/Actions/TasksActions';
+import { useDispatch } from 'react-redux';
 
 const AddTask: React.FC = () =>{
   const dispatch = useDispatch();
@@ -69,31 +63,26 @@ const AddTask: React.FC = () =>{
 
 
   return (
-    <MDBRow className='d-flex justify-content-center'>
-      <MDBInputGroup className='mb-3'>
-        <MDBInputGroupElement type='text'  
-            value={content}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => 
-            (setContent(e.target.value))} />
-        <MDBDropdown>
-        <MDBDropdownToggle outline className='dropdown-toggle-split'>
-            Task List<span> </span>
-        </MDBDropdownToggle>
-        <MDBDropdownMenu>
-            <MDBDropdownItem>
-                <MDBDropdownLink>Personal</MDBDropdownLink>
-            </MDBDropdownItem>
-            <MDBDropdownItem>
-                <MDBDropdownLink>Business</MDBDropdownLink>
-            </MDBDropdownItem>
-            <MDBDropdownItem>
-                <MDBDropdownLink>Something else here</MDBDropdownLink>
-            </MDBDropdownItem>
-        </MDBDropdownMenu>
-        </MDBDropdown>
-        <MDBBtn onClick={() => submitTask()} outline>Add Task</MDBBtn>
-      </MDBInputGroup>
-    </MDBRow>
+    <MDBContainer>
+      <MDBRow className='d-flex justify-content-center'>
+            <div style={{margin: "5px"}}>
+              <MDBInput style={{margin: "5px"}} label='Title' value={title}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>{
+                  setTitle(e.target.value)
+                }} />
+            </div>
+            
+            <div style={{margin: "5px"}}>
+              <MDBInput textarea rows="3" label="Your message" value={content} 
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => 
+                (setContent(e.target.value))} />
+            </div>
+
+            <div style={{margin: "5px"}}>
+              <MDBBtn onClick={() => submitTask()} outline>Add Task</MDBBtn>
+            </div>
+      </MDBRow>
+    </MDBContainer>
   );
 }
 
