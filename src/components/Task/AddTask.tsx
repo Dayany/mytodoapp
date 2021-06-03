@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import {MDBRow,
   MDBInput,
   MDBContainer,
-  MDBBtn
+  MDBBtn,
+  MDBCheckbox
   } from 'mdb-react-ui-kit'
 import { generateUuid } from "../Helpers/Helper";
 
@@ -18,6 +19,7 @@ const AddTask: React.FC = () =>{
   const [content, setContent] = useState(""); 
   const [title, setTitle] = useState("");
   const user: string = "guest";
+  const [isUrgent, setIsUrgent] = useState(false);
   const isDone: boolean = false;
   const today: Date = new Date();
   const createdAt: string =
@@ -30,12 +32,13 @@ const AddTask: React.FC = () =>{
   
   const priority: IPriority = { 
     level:  1, 
-    special: true 
+    special: isUrgent 
   };
 
   const clearForm = () => {
     setTitle("");
     setContent("");
+    setIsUrgent(false);
   }
   const submitTask = async (): Promise<void> => {
     const data: ITask = {
@@ -82,6 +85,10 @@ const AddTask: React.FC = () =>{
               <MDBInput textarea rows="3" label="Your message" value={content} 
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => 
                 (setContent(e.target.value))} />
+            </div>
+
+            <div style={{margin: "5px"}}>
+              <MDBCheckbox name='inlineCheck' id='inlineCheckbox1' value='isUrgent' label='Is it urgent?' inline onClick={() => setIsUrgent(!isUrgent)} />
             </div>
 
             <div style={{margin: "5px"}}>
