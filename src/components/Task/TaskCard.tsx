@@ -15,18 +15,7 @@ const TaskCard: React.FC<Props> = ({ task }) => {
   }
   const dispatch = useDispatch();
 
-  const deleteTask = async () => {
-    const requestOptions = {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json "}
-    }
-    try{ 
-      await fetch(`${process.env.REACT_APP_API_SERVER}tasks/${task.uuid}`, requestOptions)
-      .then((response) => dispatch({type: "REMOVE_TASK", payload: task.uuid}))
-    } catch(error) {
-      throw new Error(error)
-    }
-  }
+
   const setTaskDone = async () => {
     task.isDone = !task.isDone;
     const requestOptions = {
@@ -55,7 +44,6 @@ const TaskCard: React.FC<Props> = ({ task }) => {
           <MDBCardText>{task.content}</MDBCardText>
           <MDBBtn color="primary"  onClick={() => toggleShow() }>Expand Task</MDBBtn>
           <ModalTask task={task} isOpen={isOpen} toggleShow={toggleShow} />
-          <MDBBtn color="danger"  onClick={() => deleteTask()}>DELETE</MDBBtn>
           <span>  </span>
           <MDBBtn color={buttonStyle}  onClick={() => setTaskDone()}>{task.isDone ? "Re-do" : "Done"}</MDBBtn>
         </MDBCardBody>
