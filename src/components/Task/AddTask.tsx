@@ -33,6 +33,10 @@ const AddTask: React.FC = () =>{
     special: true 
   };
 
+  const clearForm = () => {
+    setTitle("");
+    setContent("");
+  }
   const submitTask = async (): Promise<void> => {
     const data: ITask = {
       uuid,
@@ -52,7 +56,10 @@ const AddTask: React.FC = () =>{
     try {
       await fetch(`${process.env.REACT_APP_API_SERVER}tasks`, requestOptions)
         .then((response) => response.json())
-        .then((data) => AddTask(data))
+        .then((data) => {
+          AddTask(data); 
+          clearForm()
+        })
     
     } catch (error) {
       throw new Error(error);
