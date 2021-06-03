@@ -17,7 +17,7 @@ const AddTask: React.FC = () =>{
   const uuid: string = generateUuid();
   const [content, setContent] = useState(""); 
   const [title, setTitle] = useState("");
-  const user = "guest";
+  const user: string = "guest";
   const isDone: boolean = false;
   const today: Date = new Date();
   const createdAt: string =

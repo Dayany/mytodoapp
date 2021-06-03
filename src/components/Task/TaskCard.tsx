@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MDBCardHeader, MDBCard, MDBCardFooter,  MDBCardTitle, MDBBtn, MDBCardBody, MDBCardText } from 'mdb-react-ui-kit'
 import { useDispatch } from 'react-redux';
+import ModalTask from './ModalTask';
 interface Props {
   task: ITask
 }
@@ -8,6 +9,10 @@ interface Props {
 const TaskCard: React.FC<Props> = ({ task }) => {
   const borderStyle =  task.isDone ? "success" : "secondary";
   const buttonStyle =  !task.isDone ? "success" : "secondary";
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleShow = () => {
+    setIsOpen(!isOpen);
+  }
   const dispatch = useDispatch();
 
   const deleteTask = async () => {
@@ -48,7 +53,8 @@ const TaskCard: React.FC<Props> = ({ task }) => {
         <MDBCardBody  border={ borderStyle } >
           <MDBCardTitle>{task.title}</MDBCardTitle>
           <MDBCardText>{task.content}</MDBCardText>
-          <MDBBtn color="primary"  href='#'>Expand Task</MDBBtn>
+          <MDBBtn color="primary"  onClick={() => toggleShow() }>Expand Task</MDBBtn>
+          <ModalTask task={task} isOpen={isOpen} toggleShow={toggleShow} />
           <MDBBtn color="danger"  onClick={() => deleteTask()}>DELETE</MDBBtn>
           <span>  </span>
           <MDBBtn color={buttonStyle}  onClick={() => setTaskDone()}>{task.isDone ? "Re-do" : "Done"}</MDBBtn>
