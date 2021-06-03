@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {MDBRow,
   MDBInput,
   MDBContainer,
-  MDBIcon,
   MDBBtn
   } from 'mdb-react-ui-kit'
 import { generateUuid } from "../Helpers/Helper";
@@ -18,7 +17,7 @@ const AddTask: React.FC = () =>{
   const uuid: string = generateUuid();
   const [content, setContent] = useState(""); 
   const [title, setTitle] = useState("");
-  const [user, setUser] = useState("guest");
+  const user = "guest";
   const isDone: boolean = false;
   const today: Date = new Date();
   const createdAt: string =
