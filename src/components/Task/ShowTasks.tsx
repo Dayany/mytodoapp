@@ -24,8 +24,14 @@ const ShowTasks: React.FC = () => {
     fetchRecipes();
   }, []);
   const filteredTasks: ITask[] = tasks?.filter((task: ITask) => {return task.isDone === displayDoneTasks });
+  
+  const orderedTasks: ITask[] = filteredTasks
+        .sort( function(a, b) { return (a.priority.special === b.priority.special) ?  1 : -1})
+        .sort((a, b) => {return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()});
+
+  console.log(orderedTasks)
   const displayFilteredCards =
-      filteredTasks?.map((task) =>
+      orderedTasks?.map((task) =>
         <MDBRow key={task.uuid}>
           <TaskCard task={task}/>
         </MDBRow>
