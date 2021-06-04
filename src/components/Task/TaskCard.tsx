@@ -43,7 +43,7 @@ const TaskCard: React.FC<Props> = ({ task }) => {
           <MDBCardTitle>{task.title}</MDBCardTitle>
           <MDBCardText>{task.content}</MDBCardText>
           <MDBBtn color="primary"  onClick={() => toggleShow() }>Expand Task</MDBBtn>
-          <ModalTask task={task} isOpen={isOpen} toggleShow={toggleShow} />
+          <ModalTask taskParent={task} isOpen={isOpen} toggleShow={toggleShow} />
           <span>  </span>
           <MDBBtn color={buttonStyle}  onClick={() => setTaskDone()}>{task.isDone ? "Re-do" : "Done"}</MDBBtn>
         </MDBCardBody>

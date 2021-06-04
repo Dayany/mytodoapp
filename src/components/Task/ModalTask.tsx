@@ -1,5 +1,6 @@
-import { ComponentType } from "react";
+import { ComponentType, useState } from "react";
 import {
+  MDBInput,
   MDBBtn,
   MDBModal,
   MDBModalDialog,
@@ -12,13 +13,15 @@ import {
 import { useDispatch } from "react-redux";
 
 interface IProps {
-  task: ITask;
+  taskParent: ITask;
   isOpen: boolean;
   toggleShow: () => void
 }
 
-const ModalTask: ComponentType<IProps> = ({ task, isOpen, toggleShow }) => {
+const ModalTask: ComponentType<IProps> = ({ taskParent, isOpen, toggleShow }) => {
   const dispatch = useDispatch();
+  const [task, setTask] = useState(taskParent);
+
   const deleteTask = async () => {
     const requestOptions = {
       method: "DELETE",
@@ -34,25 +37,58 @@ const ModalTask: ComponentType<IProps> = ({ task, isOpen, toggleShow }) => {
       throw new Error(error)
     }
   }
+
+  const saveChanges = async () => {
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json " },
+      body: JSON.stringify(task)
+    }
+    try{
+      await fetch(`${process.env.REACT_APP_API_SERVER}tasks/${task.uuid}`, requestOptions)
+      .then((response) =>{ dispatch({type: "MODIFY_TASK", payload: task})})
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
   return (
-    <MDBModal show={isOpen}>
+    <MDBModal closeOnEsc={false} show={isOpen}>
       <MDBModalDialog>
         <MDBModalContent>
           <MDBModalHeader>
-            <MDBModalTitle>{task.title}</MDBModalTitle>
+            <MDBModalTitle>
+              <MDBInput style={{margin: "5px"}} label='Title' value={task.title}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>{
+                  setTask(prevState => {
+                    let currTask = Object.assign({}, prevState);
+                    currTask.title = e.target.value;                
+                    return currTask;
+                  });
+                }} />
+            </MDBModalTitle>
             <MDBBtn
               className="btn-close"
               color="none"
               onClick={toggleShow}
             ></MDBBtn>
           </MDBModalHeader>
-          <MDBModalBody>{task.content}</MDBModalBody>
+          <MDBModalBody>
+            <MDBInput textarea rows="3" label="Description" value={task.content} 
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setTask(prevState => {
+                let currTask = Object.assign({}, prevState);
+                currTask.content= e.target.value;
+                return currTask;
+              });
+            }} /> 
+          </MDBModalBody>
           <MDBModalFooter>
             <MDBBtn color="danger"  onClick={() => deleteTask()}>DELETE</MDBBtn>
             <MDBBtn color="secondary" onClick={toggleShow}>
               Close
             </MDBBtn>
-            <MDBBtn>Save changes</MDBBtn>
+            <MDBBtn onClick={() => saveChanges()}>Save changes</MDBBtn>
           </MDBModalFooter>
             </MDBModalContent>
       </MDBModalDialog>
