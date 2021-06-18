@@ -9,6 +9,7 @@ interface Props {
 const TaskCard: React.FC<Props> = ({ task }) => {
   const borderStyle =  task.isDone ? "success" : "secondary";
   const buttonStyle =  !task.isDone ? "success" : "secondary";
+  const displayDate = new Date(task.createdAt).toDateString()
   const [isOpen, setIsOpen] = useState(false);
   const toggleShow = () => {
     setIsOpen(!isOpen);
@@ -47,7 +48,7 @@ const TaskCard: React.FC<Props> = ({ task }) => {
           <span>  </span>
           <MDBBtn color={buttonStyle}  onClick={() => setTaskDone()}>{task.isDone ? "Re-do" : "Done"}</MDBBtn>
         </MDBCardBody>
-        <MDBCardFooter  border={ borderStyle } >Created:  {task.createdAt} | By: {task.user} </MDBCardFooter>
+        <MDBCardFooter  border={ borderStyle } >Created:  {displayDate} | By: {task.user} </MDBCardFooter>
       </MDBCard>
     </React.Fragment>
   )

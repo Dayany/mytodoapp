@@ -21,14 +21,7 @@ const AddTask: React.FC = () =>{
   const user: string = "guest";
   const [isUrgent, setIsUrgent] = useState(false);
   const isDone: boolean = false;
-  const today: Date = new Date();
-  const createdAt: string =
-    today.getFullYear() +
-    "-" +
-    (today.getMonth() + 1 < 10 ? "0" : "") +
-    (today.getMonth() + 1) +
-    "-" +
-    today.getDate();
+  const createdAt: Date = new Date();
   
   const priority: IPriority = { 
     level:  1, 

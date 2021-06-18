@@ -1,14 +1,14 @@
-  interface ITask{
-    uuid: string,
-    isDone: boolean,
-    title: string,
-    content: string,
-    user: string,
-    createdAt: string
-    priority: IPriority
-  }
+interface ITask {
+  uuid: string;
+  isDone: boolean;
+  title: string;
+  content: string;
+  user: string;
+  createdAt: Date;
+  priority: IPriority;
+}
 
-  interface IPriority{
-    level: number,
-    special: boolean
-  }
+interface IPriority {
+  level: number;
+  special: boolean;
+}
