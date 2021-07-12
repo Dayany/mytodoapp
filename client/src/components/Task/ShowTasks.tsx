@@ -25,13 +25,24 @@ const ShowTasks: React.FC = () => {
     fetchRecipes();
   }, [dispatch]);
   const filteredTasks: ITask[] = tasks?.filter((task: ITask) => {return task.isDone === displayDoneTasks });
+
+
+  const orderedTasksUrgent: ITask[] = filteredTasks.filter((task: ITask) => {return task.priority.special === true})
+        .sort((a, b) => {return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()})
   
-  const orderedTasks: ITask[] = filteredTasks
-        .sort( function(a, b) { return (a.priority.special === b.priority.special) ?  -1 : 1})
+  const orderedTasksNonUrgent: ITask[] = filteredTasks.filter((task: ITask) => {return task.priority.special === false})
         .sort((a, b) => {return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()})
 
+
+  const displayFilteredCardsUrgent =
+      orderedTasksUrgent?.map((task) =>
+        <MDBRow key={task.uuid}>
+          <TaskCard task={task}/>
+        </MDBRow>
+      )
+
   const displayFilteredCards =
-      orderedTasks?.map((task) =>
+      orderedTasksNonUrgent?.map((task) =>
         <MDBRow key={task.uuid}>
           <TaskCard task={task}/>
         </MDBRow>
@@ -42,6 +53,7 @@ const ShowTasks: React.FC = () => {
       <MDBRow style={{marginBottom: '20px'}}>
         <TabTask />
       </MDBRow>
+	  {displayFilteredCardsUrgent}
       {displayFilteredCards} 
     </React.Fragment>       
   )
